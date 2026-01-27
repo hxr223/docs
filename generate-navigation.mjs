@@ -2,7 +2,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 
-/* ===================== 基础配置 ===================== */
+/* ===================== Base configuration ===================== */
 
 const MARKDOWN_EXTS = new Set([".md", ".mdx"]);
 const IGNORE_DIR_NAMES = new Set([
@@ -19,9 +19,9 @@ const DEFAULT_GROUP_NAME_BY_LANGUAGE = {
 };
 
 /**
- * ⭐ 页面标题映射（用于更新英文版本的 MDX 文件中的 title）
- * key = 中文标题
- * value = 英文标题
+ * ⭐ Page title mapping (used to update the title in English MDX files)
+ * key = Chinese title
+ * value = English title
  */
 const PAGE_TITLE_MAPPING = {
   // Agent Middleware
@@ -99,9 +99,9 @@ const PAGE_TITLE_MAPPING = {
 };
 
 /**
- * ⭐ 多语言展示名映射（核心）
- * key = 目录名（slug）
- * value = 在对应语言下的展示名
+ * ⭐ Multilingual display name overrides (core)
+ * key = directory name (slug)
+ * value = display name in corresponding language
  */
 const DISPLAY_NAME_OVERRIDES = {
   en: {
@@ -116,7 +116,7 @@ const DISPLAY_NAME_OVERRIDES = {
     troubleshooting: "Troubleshooting",
     tutorial: "Tutorial",
     workflow: "Workflow",
-    // Bi 产品
+    // Bi product
     bi: "BI",
     "indicator-management": "Indicator Management",
     "semantic-model": "Semantic Model",
@@ -137,14 +137,14 @@ const DISPLAY_NAME_OVERRIDES = {
     troubleshooting: "故障排查",
     tutorial: "教程",
     workflow: "工作流",
-    // Bi 产品
+    // Bi product
     bi: "BI",
     "indicator-management": "指标管理",
     "semantic-model": "语义模型",
     "story-dashboard": "故事看板",
     "website-features": "网站功能",
     widget: "微件",
-    // Group 名称映射（目录名）
+    // Group name mapping (directory name)
     "create-knowledge-base-via-pipeline": "通过流水线创建知识库",
     "bi-toolset": "BI 工具集",
     "chatbi-toolset": "ChatBI 工具集",
@@ -162,12 +162,12 @@ const DISPLAY_NAME_OVERRIDES = {
 };
 
 /**
- * ⭐ Tab 顺序配置（核心）
- * key = 产品目录名（slug）
- * value = tab 目录名（slug）数组，按显示顺序排列
- * 
- * 如果某个 tab 不在配置中，会按字母顺序排在最后
- * 新增 tab 时，只需在此配置中添加即可控制顺序
+ * ⭐ Tab order configuration (core)
+ * key = product directory name (slug)
+ * value = array of tab directory names (slug) in display order
+ *
+ * Tabs not in this config will be sorted alphabetically at the end.
+ * When adding a new tab, add it here to control ordering.
  */
 const TAB_ORDER_BY_PRODUCT = {
   ai: [
@@ -190,11 +190,14 @@ const TAB_ORDER_BY_PRODUCT = {
     "widget",
     "website-features",
   ],
+  code: [
+    "web"
+  ]
 };
 
-/* ===================== Navbar 多语言映射 ===================== */
+/* ===================== Navbar multilingual mapping ===================== */
 
-// 语言节点内的 navbar（数组格式）
+// navbar inside language node (array format)
 const NAVBAR_ARRAY_BY_LANGUAGE = {
   en: [
     { label: "GitHub", href: "https://github.com/xpert-ai/xpert" },
@@ -208,7 +211,7 @@ const NAVBAR_ARRAY_BY_LANGUAGE = {
   ],
 };
 
-// 顶层 navbar（对象格式）——避免 main() 里引用未定义变量导致崩溃
+// top-level navbar (object format) — avoid crash if main() references undefined
 const NAVBAR_BY_LANGUAGE = {
   en: {
     links: [
@@ -236,7 +239,7 @@ const NAVBAR_BY_LANGUAGE = {
 
 
 
-/* ===================== 工具函数 ===================== */
+/* ===================== Utility functions ===================== */
 
 function parseArgs(argv) {
   const args = {
@@ -277,14 +280,14 @@ function pagePathFromFile(contentRootAbs, fileAbs) {
 }
 
 /**
- * 检测文本中是否包含中文
+ * Check if text contains Chinese characters
  */
 function containsChinese(text) {
   return /[\u4e00-\u9fa5]/.test(text);
 }
 
 /**
- * 解析 frontmatter 中的 title
+ * Parse title from frontmatter
  */
 function parseFrontmatterTitle(content) {
   if (!content.startsWith("---")) {
@@ -302,7 +305,7 @@ function parseFrontmatterTitle(content) {
 }
 
 /**
- * 解析 frontmatter 中的 sidebar_position
+ * Parse sidebar_position from frontmatter
  */
 function parseFrontmatterSidebarPosition(content) {
   if (!content.startsWith("---")) {
@@ -325,7 +328,7 @@ function parseFrontmatterSidebarPosition(content) {
 }
 
 /**
- * 根据文件名生成英文标题
+ * Generate an English title from filename
  */
 function generateEnglishTitleFromFilename(filePath) {
   const basename = path.basename(filePath, path.extname(filePath));
@@ -336,7 +339,7 @@ function generateEnglishTitleFromFilename(filePath) {
 }
 
 /**
- * 更新 frontmatter 中的 title
+ * Update title in frontmatter
  */
 function updateFrontmatterTitle(content, newTitle) {
   if (!content.startsWith("---")) {
@@ -360,7 +363,7 @@ function updateFrontmatterTitle(content, newTitle) {
 }
 
 /**
- * 更新英文版本的 MDX 文件中的 title（如果包含中文）
+ * Update English MDX file title if it contains Chinese
  */
 async function updateEnglishPageTitle(filePath, updateTitles) {
   if (!updateTitles || !filePath.includes("/en/")) {
@@ -375,10 +378,10 @@ async function updateEnglishPageTitle(filePath, updateTitles) {
       return { updated: false };
     }
 
-    // 查找映射表
+    // lookup mapping
     let newTitle = PAGE_TITLE_MAPPING[currentTitle];
 
-    // 如果映射表中没有，根据文件名生成
+    // fallback: generate from filename if not in mapping
     if (!newTitle) {
       newTitle = generateEnglishTitleFromFilename(filePath);
     }
@@ -388,13 +391,13 @@ async function updateEnglishPageTitle(filePath, updateTitles) {
 
     return { updated: true, oldTitle: currentTitle, newTitle };
   } catch (error) {
-    console.warn(`⚠️  更新文件标题失败: ${filePath}`, error.message);
+    console.warn(`⚠️ Failed to update file title: ${filePath}`, error.message);
     return { updated: false, error: error.message };
   }
 }
 
 /**
- * ⭐ 语言感知展示名
+ * ⭐ Language-aware display name
  */
 function toDisplayName(slug, language) {
   if (!slug) return slug;
@@ -402,7 +405,7 @@ function toDisplayName(slug, language) {
   const override = DISPLAY_NAME_OVERRIDES?.[language]?.[slug];
   if (override) return override;
 
-  // fallback：英文自动 Title Case
+  // fallback: Title Case from slug
   return slug
     .split(/[-_]+/g)
     .filter(Boolean)
@@ -422,22 +425,22 @@ async function listDir(dirAbs) {
 }
 
 /**
- * ⭐ 页面排序函数
- * 排序规则（优先级从高到低）：
- * 1. index 文件排在最前面
- * 2. 有 sidebar_position 的按数值排序（数字越小越靠前）
- * 3. 其他按路径字母顺序排序
+ * ⭐ Page sorting function
+ * Sorting rules (priority high -> low):
+ * 1. index files first
+ * 2. files with sidebar_position sorted by number (smaller first)
+ * 3. others sorted alphabetically by path
  */
 async function sortPages(pages, contentRootAbs) {
   const isIndex = (p) => p.endsWith("/index");
   
-  // 读取每个页面的 sidebar_position
+  // read sidebar_position for each page
   const pagePositions = new Map();
   for (const pagePath of pages) {
     const filePath = path.join(contentRootAbs, pagePath + ".mdx");
     let altPath = path.join(contentRootAbs, pagePath + ".md");
     
-    // 尝试读取 .mdx 或 .md 文件
+    // try .mdx or .md
     let content = null;
     try {
       content = await fs.readFile(filePath, "utf8");
@@ -445,7 +448,7 @@ async function sortPages(pages, contentRootAbs) {
       try {
         content = await fs.readFile(altPath, "utf8");
       } catch {
-        // 文件不存在，跳过
+        // file not found, skip
       }
     }
     
@@ -458,21 +461,21 @@ async function sortPages(pages, contentRootAbs) {
   }
   
   return [...pages].sort((a, b) => {
-    // 1. index 文件优先
+    // 1. index files first
     if (isIndex(a) && !isIndex(b)) return -1;
     if (!isIndex(a) && isIndex(b)) return 1;
     
-    // 2. 有 sidebar_position 的按数值排序
+    // 2. sidebar_position numeric order
     const posA = pagePositions.get(a);
     const posB = pagePositions.get(b);
     
     if (posA !== undefined && posB !== undefined) {
       return posA - posB;
     }
-    if (posA !== undefined) return -1; // A 有 position，排在前面
-    if (posB !== undefined) return 1;  // B 有 position，排在前面
+    if (posA !== undefined) return -1; // A has position -> earlier
+    if (posB !== undefined) return 1;  // B has position -> earlier
     
-    // 3. 其他按字母顺序
+    // 3. alphabetic fallback
     return a.localeCompare(b);
   });
 }
@@ -495,7 +498,7 @@ async function collectPagesRecursively(dirAbs, contentRootAbs, updateTitles = fa
         const pagePath = pagePathFromFile(contentRootAbs, full);
         pages.push(pagePath);
         
-        // 如果启用了更新标题功能，更新英文版本的 title
+        // If updateTitles enabled, update English page title
         if (updateTitles) {
           await updateEnglishPageTitle(full, updateTitles);
         }
@@ -506,7 +509,7 @@ async function collectPagesRecursively(dirAbs, contentRootAbs, updateTitles = fa
   return sortPages(pages, contentRootAbs);
 }
 
-/* ===================== 核心逻辑 ===================== */
+/* ===================== Core logic ===================== */
 
 async function buildNavigationForLanguage(language, docs, contentRootAbs, updateTitles = false) {
   const langAbs = path.join(contentRootAbs, language);
@@ -553,7 +556,7 @@ async function buildNavigationForLanguage(language, docs, contentRootAbs, update
           const filePath = pagePathFromFile(contentRootAbs, childAbs);
           defaultPages.push(filePath);
           
-          // 如果启用了更新标题功能，更新英文版本的 title
+          // If updateTitles enabled, update English page title
           if (updateTitles) {
             await updateEnglishPageTitle(childAbs, updateTitles);
           }
@@ -581,11 +584,11 @@ async function buildNavigationForLanguage(language, docs, contentRootAbs, update
       tabs.push(tabNode);
     }
 
-    // ⭐ 根据配置对 tabs 进行排序
+    // ⭐ Sort tabs according to configuration
     if (tabs.length) {
       const tabOrder = TAB_ORDER_BY_PRODUCT[productSlug] || [];
       
-      // 创建一个映射，将 tab slug 映射到其配置顺序
+      // create a map from tab slug to configured index
       const tabOrderMap = new Map();
       tabOrder.forEach((slug, index) => {
         tabOrderMap.set(slug, index);
@@ -595,23 +598,23 @@ async function buildNavigationForLanguage(language, docs, contentRootAbs, update
         const orderA = tabOrderMap.get(a.tabSlug);
         const orderB = tabOrderMap.get(b.tabSlug);
         
-        // 如果两个都在配置中，按配置顺序排序
+        // if both configured, sort by configured order
         if (orderA !== undefined && orderB !== undefined) {
           return orderA - orderB;
         }
-        // 如果只有 A 在配置中，A 排在前面
+        // if only A configured, A first
         if (orderA !== undefined) {
           return -1;
         }
-        // 如果只有 B 在配置中，B 排在前面
+        // if only B configured, B first
         if (orderB !== undefined) {
           return 1;
         }
-        // 如果都不在配置中，按字母顺序排序
+        // otherwise alphabetic by slug
         return a.tabSlug.localeCompare(b.tabSlug);
       });
       
-      // 排序后移除 tabSlug，只保留 tab（显示名）用于输出
+      // After sorting, remove tabSlug, keep tab (display name) for output
       tabs.forEach(tab => delete tab.tabSlug);
 
       products.push({
@@ -621,16 +624,16 @@ async function buildNavigationForLanguage(language, docs, contentRootAbs, update
     }
   }
 
-  // 获取现有配置（如果有），但排除 products 和 navbar，这些由脚本生成
+  // Get existing config (if any), but exclude products and navbar which are generated by the script
   const existingConfig = docs.navigation?.languages?.find((l) => l.language === language) ?? {};
   const { products: _, navbar: __, ...restConfig } = existingConfig;
   
   return {
-    ...restConfig, // 保留其他配置（如 default）
+    ...restConfig, // keep other config (e.g., default)
     language,
-    // 为每个语言添加对应的 navbar（数组格式）
+    // add per-language navbar (array format)
     navbar: NAVBAR_ARRAY_BY_LANGUAGE[language] ?? NAVBAR_ARRAY_BY_LANGUAGE.en,
-    products, // 新生成的 products，确保使用最新的显示名
+    products, // newly generated products with updated display names
   };
 }
 
@@ -676,8 +679,8 @@ async function main() {
   docs.navigation ??= {};
   docs.navigation.languages = languageNodes;
 
-  // 注意：navbar 已在每个语言节点中配置，如果 Mintlify 不支持，
-  // 则使用全局 navbar（默认语言的）
+  // Note: navbar is configured per-language; if Mintlify doesn't support it,
+  // fall back to global navbar (default language)
   if (!docs.navbar) {
     const defaultLang =
       languageNodes.find((l) => l.default)?.language ??
@@ -686,10 +689,10 @@ async function main() {
     docs.navbar = NAVBAR_BY_LANGUAGE[defaultLang] ?? NAVBAR_BY_LANGUAGE.en;
   }
 
-  // ⭐ 站点自定义样式入口（用于字体/侧边栏强调等）
-  // 如果 docs.json 已配置 css，则不覆盖
+  // ⭐ Site custom CSS entry (for fonts/sidebar emphasis etc)
+  // If docs.json already configures css, do not override
   if (!docs.css) {
-    // 注意：本项目静态资源路径是 /public/xxx（例如 /public/styles.css）
+    // Note: this project's static assets path is /public/xxx (e.g., /public/styles.css)
     docs.css = "/public/styles.css";
   }
 

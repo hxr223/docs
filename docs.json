@@ -580,6 +580,22 @@
                 ]
               }
             ]
+          },
+          {
+            "product": "Code",
+            "tabs": [
+              {
+                "tab": "Web",
+                "groups": [
+                  {
+                    "group": "Default",
+                    "pages": [
+                      "en/code/web/index"
+                    ]
+                  }
+                ]
+              }
+            ]
           }
         ]
       },
@@ -1100,6 +1116,22 @@
                       "zh-Hans/bi/tutorial/sap/sap-bpc-consolidated-reports",
                       "zh-Hans/bi/tutorial/sap/how-to-analyze-sap-bw-data-models",
                       "zh-Hans/bi/tutorial/sap/sap-bw-calendar-dimension"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "product": "Code",
+            "tabs": [
+              {
+                "tab": "Web",
+                "groups": [
+                  {
+                    "group": "默认",
+                    "pages": [
+                      "zh-Hans/code/web/index"
                     ]
                   }
                 ]
