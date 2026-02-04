@@ -40,3 +40,7 @@ Run the documentation site locally using Docker:
 docker build -t xpert-ai/docs . \
   && docker run --rm -p 3000:3000 xpert-ai/docs
 ```
+
+## Preview Locally with Mint
+
+`mint dev`
