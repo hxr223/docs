@@ -7,4 +7,70 @@ tags:
   - Code
 ---
 
-Code Agent.
+CodeXpert is an AI coding workspace that helps you plan tasks, explore changes, and ship pull requests with confidence. It pairs a chat-first experience with a structured task timeline, live file change diffs, and a clear audit of what happened during execution.
+
+## What you can do
+
+- Create coding tasks with instructions and attachments.
+- Run tasks in a dedicated environment while watching terminal output.
+- Review file diffs, line changes, and change set summaries.
+- Create or open pull requests from the latest change set.
+- Archive completed tasks for a clean active list.
+
+## Core concepts
+
+### Tasks
+Tasks are the unit of work. Each task tracks:
+
+- Instruction and status
+- Repository and branch context
+- Change sets and file diffs
+- Terminal output from the execution environment
+
+### Change sets
+Every sync captures a change set that includes:
+
+- File change list
+- Unified and split diffs
+- Line additions and deletions
+- Optional pull request metadata
+
+### Environments
+Environments define how CodeXpert runs your work:
+
+- Repository connection and default branch
+- Setup scripts and preinstalled packages
+- Network access and runtime settings
+
+## Typical workflow
+
+1. Connect a repository and select a branch.
+2. Create a task with a clear instruction.
+3. Watch execution progress and terminal logs.
+4. Review diffs and summarize results.
+5. Create a pull request or continue iterating.
+
+## Key UI surfaces
+
+### Task page
+The task page brings together:
+
+- Task header with repo, branch, and change stats
+- Chat panel for iterative guidance
+- Terminal output from sandboxed commands
+- File diff viewer (split or unified)
+- Pull request actions and copy helpers
+
+### Settings
+Configure your workspace to match your workflow:
+
+- Environments (runtime, setup, caching)
+- Connectors (repository access)
+- Code review preferences
+
+## Best practices
+
+- Write instructions as a short goal plus constraints.
+- Sync after major steps to capture clean change sets.
+- Use the diff viewer to validate impact before PR.
+- Archive finished tasks to keep focus on active work.
