@@ -158,6 +158,7 @@ const DISPLAY_NAME_OVERRIDES = {
     "input-controller": "输入控制器",
     "dimension-designer": "维度设计器",
     "multidimensional-dataset-designer": "多维数据集设计器",
+    "Sandbox": "沙箱",
   },
 };
 

@@ -33,8 +33,7 @@
   "footer": {
     "socials": {
       "x": "https://xpertai.cn/",
-      "github": "https://github.com/xpert-ai/xpert",
-      "linkedin": "https://linkedin.com/company/mintlify"
+      "github": "https://github.com/xpert-ai/xpert"
     }
   },
   "navbar": {
@@ -97,6 +96,12 @@
                       "en/ai/digital-expert/monitoring-dashboard",
                       "en/ai/digital-expert/supervised-architecture",
                       "en/ai/digital-expert/swarm-architecture"
+                    ]
+                  },
+                  {
+                    "group": "Sandbox",
+                    "pages": [
+                      "en/ai/digital-expert/sandbox/index"
                     ]
                   }
                 ]
@@ -642,6 +647,12 @@
                       "zh-Hans/ai/digital-expert/monitoring-dashboard",
                       "zh-Hans/ai/digital-expert/supervised-architecture",
                       "zh-Hans/ai/digital-expert/swarm-architecture"
+                    ]
+                  },
+                  {
+                    "group": "沙箱",
+                    "pages": [
+                      "zh-Hans/ai/digital-expert/sandbox/index"
                     ]
                   }
                 ]

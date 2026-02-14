@@ -9,6 +9,14 @@ tags:
 
 CodeXpert 是面向工程团队的智能编码平台，融合对话式协作与任务化工作流。你可以创建任务、观察执行过程、查看文件变更，并一键生成或打开 PR。
 
+![Code Xpert](/public/img/code/code-xpert-arch.png)
+
+编码智能体系统采用分层解耦架构：
+- **[CodeXpert](https://code.xpertai.cn/) Web 与 CodeXpert Server** 构成前后端系统，负责用户交互与会话管理；
+- 核心的 **[XpertAI Agent Server](https://app.xpertai.cn/)** 作为智能体编排平台，调度编码智能体、管理线程上下文并调用 **LLM（第三方或本地大模型）** 进行推理与代码生成；
+- 所有代码执行与测试任务均在隔离的 **[Sandbox](/zh-Hans/ai/digital-expert/sandbox) 沙箱环境** 中安全运行；
+- 同时系统可连接 **GitHub 及其他代码仓库平台** 实现代码拉取、提交与 PR 交互，形成从智能推理、代码生成、安全执行到仓库协作的完整闭环架构。
+
 ## 你可以做什么
 
 - 创建包含指令与附件的编码任务
