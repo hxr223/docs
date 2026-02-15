@@ -5,11 +5,11 @@ sidebar_position: 1
 
 ## 背景说明
 
-本篇将简述如何通过 docker run 或 docker-compose up 命令快速构建一套完整的元数分析平台集群。
+本篇将简述如何通过 docker run 或 docker-compose up 命令快速构建一套完整的XpertAI集群。
 
 ## 适用场景
 
-建议在 SIT 或者 DEV 环境中使用元数分析平台 Docker 容器来简化部署的流程。
+建议在 SIT 或者 DEV 环境中使用XpertAI Docker 容器来简化部署的流程。
 
 ## 软件环境
 
@@ -41,7 +41,7 @@ cp env.tmpl .env
 docker-compose -f docker-compose.yml up -d
 ```
 
-服务启动完成后访问 [http://localhost/](http://localhost/) （或者 http://your.ip/ 或 http://your.domain/ ）即可看到元数分析平台的 [系统初始化向导](../onboarding/) 页面。
+服务启动完成后访问 [http://localhost/](http://localhost/) （或者 http://your.ip/ 或 http://your.domain/ ）即可看到XpertAI的 [系统初始化向导](../onboarding/) 页面。
 
 <Tip>
 **域名**
@@ -57,7 +57,7 @@ docker-compose -f docker-compose.yml up -d
 
 ### Docker Compose 网络模式说明
 
-元数分析平台部署 Docker 适用的网络模式有两种:
+XpertAI部署 Docker 适用的网络模式有两种:
 
 1. 适合跨多节点部署的 **HOST 模式**，这种模式适合将不同服务部署到多个节点服务器上。
 2. 适合单节点部署多服务进程的 **子网网桥模式**，这种模式适合单节点部署多种服务的情况。
@@ -66,7 +66,7 @@ docker-compose -f docker-compose.yml up -d
 
 ### Docker Compose 脚本
 
-部署元数分析平台需要 5 个基本的服务，在文件 `docker-compose.yml` 中定义了这些服务容器：
+部署XpertAI需要 5 个基本的服务，在文件 `docker-compose.yml` 中定义了这些服务容器：
 1. db: 数据库服务, 使用 postgres 数据库
 2. redis: 服务端缓存服务, 使用 redis 数据库
 3. olap: OLAP 引擎服务, 使用 metad-olap 镜像

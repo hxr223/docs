@@ -76,7 +76,7 @@ kubectl apply -f manifest.yaml -n dev
 
 #### 域名配置
 
-元数分析平台默认配置了 `localhost` 作为域名，如果需要使用自定义域名或服务器 IP 地址访问，请修改 ConfigMap `config-data` 中如下配置：
+XpertAI默认配置了 `localhost` 作为域名，如果需要使用自定义域名或服务器 IP 地址访问，请修改 ConfigMap `config-data` 中如下配置：
 
 ```yaml
 ...
