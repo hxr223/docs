@@ -1223,7 +1223,6 @@
                     "group": "默认",
                     "pages": [
                       "zh-Hans/code/web/index",
-                      "zh-Hans/code/web/blog-codexpert",
                       "zh-Hans/code/web/tasks",
                       "zh-Hans/code/web/change-sets",
                       "zh-Hans/code/web/environments"
