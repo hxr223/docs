@@ -3,9 +3,9 @@ sidebar_position: 10
 title: 插件权限设计指南
 ---
 
-:::tip
+<Tip>
 在 meta 中设计一套可以向核心系统反向请求 大模型 调用权限的（如请求一个 OpenAI Client实例）的配置，例如在 meta中声明大模型的权限请求，在 configSchema 中设计属性让用户配置具体的模型提供商和模型名称，核心系统在识别到权限请求时会根据 config 中用户配置的具体参数实例化大模型 Client 通过 config 传入到 understandImages 这个方法：
-:::
+</Tip>
 
 👌明白了，你希望 **在插件 Strategy 的 meta 中声明依赖的大模型权限请求**，核心系统解析后根据用户配置（模型提供商 + 模型名称 + 其他参数）自动注入一个 `client` 到 `config`，这样插件不用自己创建 OpenAI / Anthropic / 其他 VLM 客户端。
 

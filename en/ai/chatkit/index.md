@@ -24,7 +24,7 @@ At a high level, setup takes three steps: create an agent workflow hosted on Xpe
 ![ChatKit Architecture](/public/img/ai/chatkit/Developer-ChatKit-Arch.png)
 
 1. Create an agent workflow<br/>
-Use the [Agent Studio](https://app.mtda.cloud/xpert/w/) to design a multi-step, multi-agent workflow. You will receive an agent (digital expert) ID. The embedded chat in your frontend points to this workflow as the backend.
+Use the [Agent Studio](https://app.xpertai.cn/xpert/w/) to design a multi-step, multi-agent workflow. You will receive an agent (digital expert) ID. The embedded chat in your frontend points to this workflow as the backend.
 
 2. Set up ChatKit in your product<br/>
 You need to create a ChatKit session, expose a backend endpoint that takes your agent ID, exchanges a client secret, and add a script to embed ChatKit in your site.

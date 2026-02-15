@@ -22,7 +22,7 @@ ChatKit 是构建智能代理型聊天体验的最佳方式。无论你是在打
 ![ChatKit 架构图](/public/img/ai/chatkit/Developer-ChatKit-Arch.png)
 
 1. 创建智能体工作流程<br/>
-使用 [数字专家工作室](https://app.mtda.cloud/xpert/w/) 创建智能体工作流程。Agent 工作室是一个用于设计多步骤多智能体工作流程的可视化画布。你将获得一个工作流程的数字专家 ID。
+使用 [数字专家工作室](https://app.xpertai.cn/xpert/w/) 创建智能体工作流程。Agent 工作室是一个用于设计多步骤多智能体工作流程的可视化画布。你将获得一个工作流程的数字专家 ID。
 嵌入到你的前端的聊天将指向你创建的数字专家工作流程作为后端。
 
 2. 在您的产品中设置 ChatKit<br/>

@@ -77,6 +77,44 @@
             "product": "AI",
             "tabs": [
               {
+                "tab": "Getting Started",
+                "groups": [
+                  {
+                    "group": "Community",
+                    "pages": [
+                      "en/ai/getting-started/community/index",
+                      "en/ai/getting-started/community/docker",
+                      "en/ai/getting-started/community/local-source-code",
+                      "en/ai/getting-started/community/environments",
+                      "en/ai/getting-started/community/faqs"
+                    ]
+                  },
+                  {
+                    "group": "Onboarding",
+                    "pages": [
+                      "en/ai/getting-started/onboarding/index"
+                    ]
+                  },
+                  {
+                    "group": "Cloud",
+                    "pages": [
+                      "en/ai/getting-started/cloud/index"
+                    ]
+                  },
+                  {
+                    "group": "Enterprise",
+                    "pages": [
+                      "en/ai/getting-started/enterprise/docker/index",
+                      "en/ai/getting-started/enterprise/k8s/index",
+                      "en/ai/getting-started/enterprise/k8s/backups",
+                      "en/ai/getting-started/enterprise/docker/with-doris",
+                      "en/ai/getting-started/enterprise/docker/with-starrocks",
+                      "en/ai/getting-started/enterprise/ssl"
+                    ]
+                  }
+                ]
+              },
+              {
                 "tab": "Digital Expert",
                 "groups": [
                   {
@@ -628,6 +666,45 @@
             "product": "AI",
             "tabs": [
               {
+                "tab": "快速开始",
+                "groups": [
+                  {
+                    "group": "社区",
+                    "pages": [
+                      "zh-Hans/ai/getting-started/community/index",
+                      "zh-Hans/ai/getting-started/community/docker",
+                      "zh-Hans/ai/getting-started/community/local-source-code",
+                      "zh-Hans/ai/getting-started/community/environments",
+                      "zh-Hans/ai/getting-started/community/faqs"
+                    ]
+                  },
+                  {
+                    "group": "入门指南",
+                    "pages": [
+                      "zh-Hans/ai/getting-started/onboarding/index"
+                    ]
+                  },
+                  {
+                    "group": "云服务",
+                    "pages": [
+                      "zh-Hans/ai/getting-started/cloud/index"
+                    ]
+                  },
+                  {
+                    "group": "企业版",
+                    "pages": [
+                      "zh-Hans/ai/getting-started/enterprise/docker/index",
+                      "zh-Hans/ai/getting-started/enterprise/k8s/index",
+                      "zh-Hans/ai/getting-started/enterprise/pro/index",
+                      "zh-Hans/ai/getting-started/enterprise/k8s/backups",
+                      "zh-Hans/ai/getting-started/enterprise/docker/with-doris",
+                      "zh-Hans/ai/getting-started/enterprise/docker/with-starrocks",
+                      "zh-Hans/ai/getting-started/enterprise/ssl"
+                    ]
+                  }
+                ]
+              },
+              {
                 "tab": "数字专家",
                 "groups": [
                   {
@@ -1146,6 +1223,7 @@
                     "group": "默认",
                     "pages": [
                       "zh-Hans/code/web/index",
+                      "zh-Hans/code/web/blog-codexpert",
                       "zh-Hans/code/web/tasks",
                       "zh-Hans/code/web/change-sets",
                       "zh-Hans/code/web/environments"
@@ -1160,11 +1238,6 @@
     ],
     "global": {
       "anchors": [
-        {
-          "anchor": "Documentation",
-          "href": "https://xpertai.cn/docs/",
-          "icon": "book-open-cover"
-        },
         {
           "anchor": "Blog",
           "href": "https://xpertai.cn/blog/",

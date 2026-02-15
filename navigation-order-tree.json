@@ -1,0 +1,100 @@
+{
+  "products": [
+    {
+      "slug": "ai",
+      "tabs": [
+        {
+          "slug": "getting-started",
+          "groups": [
+            {
+              "slug": "community",
+              "pages": []
+            },
+            {
+              "slug": "onboarding",
+              "pages": []
+            }
+          ]
+        },
+        {
+          "slug": "digital-expert",
+          "groups": []
+        },
+        {
+          "slug": "conversation",
+          "groups": []
+        },
+        {
+          "slug": "knowledge-base",
+          "groups": []
+        },
+        {
+          "slug": "toolset",
+          "groups": []
+        },
+        {
+          "slug": "workflow",
+          "groups": []
+        },
+        {
+          "slug": "ai-assistant",
+          "groups": []
+        },
+        {
+          "slug": "agent-middleware",
+          "groups": []
+        },
+        {
+          "slug": "plugin-development",
+          "groups": []
+        },
+        {
+          "slug": "chatkit",
+          "groups": []
+        },
+        {
+          "slug": "troubleshooting",
+          "groups": []
+        },
+        {
+          "slug": "tutorial",
+          "groups": []
+        }
+      ]
+    },
+    {
+      "slug": "bi",
+      "tabs": [
+        {
+          "slug": "semantic-model",
+          "groups": []
+        },
+        {
+          "slug": "indicator-management",
+          "groups": []
+        },
+        {
+          "slug": "story-dashboard",
+          "groups": []
+        },
+        {
+          "slug": "widget",
+          "groups": []
+        },
+        {
+          "slug": "website-features",
+          "groups": []
+        }
+      ]
+    },
+    {
+      "slug": "code",
+      "tabs": [
+        {
+          "slug": "web",
+          "groups": []
+        }
+      ]
+    }
+  ]
+}

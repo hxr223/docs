@@ -41,5 +41,5 @@ When the host starts, it will automatically parse the `PLUGINS` environment vari
 * The host project should install the plugin packages via npm/yarn/pnpm (`npm install @xpert-ai/my-plugin`) and configure the plugin list in the environment variable.
 * The plugin's `meta.name` must match the npm package name.
 * If a plugin fails to load correctly, check the logs for `register` or `onPluginBootstrap` output.
-* After starting the Xpert AI system, you can view the loaded plugins on the system settings [Plugins page](https://app.mtda.cloud/settings/plugins).
+* After starting the Xpert AI system, you can view the loaded plugins on the system settings [Plugins page](https://app.xpertai.cn/settings/plugins).
 

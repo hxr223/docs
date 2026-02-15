@@ -17,6 +17,8 @@ const DEFAULT_GROUP_NAME_BY_LANGUAGE = {
   en: "Default",
   "zh-Hans": "默认",
 };
+const DEFAULT_GROUP_SLUG = "__default__";
+const EMPTY_MAP = new Map();
 
 /**
  * ⭐ Page title mapping (used to update the title in English MDX files)
@@ -100,100 +102,33 @@ const PAGE_TITLE_MAPPING = {
 
 /**
  * ⭐ Multilingual display name overrides (core)
- * key = directory name (slug)
- * value = display name in corresponding language
+ * loaded from JSON config file
  */
-const DISPLAY_NAME_OVERRIDES = {
-  en: {
-    ai: "AI",
-    "agent-middleware": "Agent Middleware",
-    "ai-assistant": "AI Assistant",
-    conversation: "Conversation",
-    "digital-expert": "Digital Expert",
-    "knowledge-base": "Knowledge Base",
-    "plugin-development": "Plugin Development",
-    toolset: "Toolset",
-    troubleshooting: "Troubleshooting",
-    tutorial: "Tutorial",
-    workflow: "Workflow",
-    // Bi product
-    bi: "BI",
-    "indicator-management": "Indicator Management",
-    "semantic-model": "Semantic Model",
-    "story-dashboard": "Story Dashboard",
-    "website-features": "Website Features",
-    widget: "Widget",
-  },
-
-  "zh-Hans": {
-    ai: "AI",
-    "agent-middleware": "智能体中间件",
-    "ai-assistant": "AI 助手",
-    conversation: "对话",
-    "digital-expert": "数字专家",
-    "knowledge-base": "知识库",
-    "plugin-development": "插件开发",
-    toolset: "工具集",
-    troubleshooting: "故障排查",
-    tutorial: "教程",
-    workflow: "工作流",
-    // Bi product
-    bi: "BI",
-    "indicator-management": "指标管理",
-    "semantic-model": "语义模型",
-    "story-dashboard": "故事看板",
-    "website-features": "网站功能",
-    widget: "微件",
-    // Group name mapping (directory name)
-    "create-knowledge-base-via-pipeline": "通过流水线创建知识库",
-    "bi-toolset": "BI 工具集",
-    "chatbi-toolset": "ChatBI 工具集",
-    "mcp-tools": "MCP 工具",
-    "virtual-environment": "虚拟环境",
-    "feishu-document-example": "飞书文档示例",
-    errors: "错误",
-    "analysis-card": "分析卡片",
-    "analysis-table": "分析表格",
-    "filter-bar": "筛选栏",
-    "input-controller": "输入控制器",
-    "dimension-designer": "维度设计器",
-    "multidimensional-dataset-designer": "多维数据集设计器",
-    "Sandbox": "沙箱",
-  },
-};
+const DISPLAY_NAME_OVERRIDES_FILE = new URL(
+  "./display-name-overrides.json",
+  import.meta.url
+);
+let DISPLAY_NAME_OVERRIDES = {};
 
 /**
- * ⭐ Tab order configuration (core)
- * key = product directory name (slug)
- * value = array of tab directory names (slug) in display order
+ * ⭐ Navigation order tree configuration (core)
+ * loaded from JSON config file
  *
- * Tabs not in this config will be sorted alphabetically at the end.
- * When adding a new tab, add it here to control ordering.
+ * Schema:
+ * products[].slug
+ * products[].tabs[].slug
+ * products[].tabs[].groups[].slug (use "__default__" for tab root pages)
+ * products[].tabs[].groups[].pages[] (tab-relative path without extension)
  */
-const TAB_ORDER_BY_PRODUCT = {
-  ai: [
-    "digital-expert",
-    "conversation",
-    "knowledge-base",
-    "toolset",
-    "workflow",
-    "ai-assistant",
-    "agent-middleware",
-    "plugin-development",
-    "chatkit",
-    "troubleshooting",
-    "tutorial",
-  ],
-  bi: [
-    "semantic-model",
-    "indicator-management",
-    "story-dashboard",
-    "widget",
-    "website-features",
-  ],
-  code: [
-    "web"
-  ]
+const NAVIGATION_ORDER_TREE_FILE = new URL(
+  "./navigation-order-tree.json",
+  import.meta.url
+);
+let NAVIGATION_ORDER_INDEXES = {
+  productOrderMap: EMPTY_MAP,
+  tabOrderMapByProduct: EMPTY_MAP,
+  groupOrderMapByProductTab: EMPTY_MAP,
+  pageOrderMapByProductTabGroup: EMPTY_MAP,
 };
 
 /* ===================== Navbar multilingual mapping ===================== */
@@ -414,6 +349,127 @@ function toDisplayName(slug, language) {
     .join(" ");
 }
 
+function normalizeStringArray(value) {
+  if (!Array.isArray(value)) return [];
+  return value.filter((item) => typeof item === "string" && item.length > 0);
+}
+
+function buildNavigationOrderIndexes(orderTree) {
+  const products = Array.isArray(orderTree?.products)
+    ? orderTree.products
+    : [];
+
+  const productOrderMap = new Map();
+  const tabOrderMapByProduct = new Map();
+  const groupOrderMapByProductTab = new Map();
+  const pageOrderMapByProductTabGroup = new Map();
+
+  products.forEach((productNode, productIndex) => {
+    const productSlug = productNode?.slug;
+    if (typeof productSlug !== "string" || !productSlug) return;
+
+    if (!productOrderMap.has(productSlug)) {
+      productOrderMap.set(productSlug, productIndex);
+    }
+
+    const tabs = Array.isArray(productNode.tabs) ? productNode.tabs : [];
+    const tabOrderMap = new Map();
+    const groupOrderMapByTab = new Map();
+    const pageOrderMapByTabGroup = new Map();
+
+    tabs.forEach((tabNode, tabIndex) => {
+      const tabSlug = tabNode?.slug;
+      if (typeof tabSlug !== "string" || !tabSlug) return;
+
+      if (!tabOrderMap.has(tabSlug)) {
+        tabOrderMap.set(tabSlug, tabIndex);
+      }
+
+      const groups = Array.isArray(tabNode.groups) ? tabNode.groups : [];
+      const groupOrderMap = new Map();
+      const pageOrderMapByGroup = new Map();
+
+      groups.forEach((groupNode, groupIndex) => {
+        const groupSlug = groupNode?.slug;
+        if (typeof groupSlug !== "string" || !groupSlug) return;
+
+        if (!groupOrderMap.has(groupSlug)) {
+          groupOrderMap.set(groupSlug, groupIndex);
+        }
+
+        const pages = normalizeStringArray(groupNode.pages);
+        const pageOrderMap = new Map();
+        pages.forEach((pageSlug, pageIndex) => {
+          if (!pageOrderMap.has(pageSlug)) {
+            pageOrderMap.set(pageSlug, pageIndex);
+          }
+        });
+
+        pageOrderMapByGroup.set(groupSlug, pageOrderMap);
+      });
+
+      groupOrderMapByTab.set(tabSlug, groupOrderMap);
+      pageOrderMapByTabGroup.set(tabSlug, pageOrderMapByGroup);
+    });
+
+    tabOrderMapByProduct.set(productSlug, tabOrderMap);
+    groupOrderMapByProductTab.set(productSlug, groupOrderMapByTab);
+    pageOrderMapByProductTabGroup.set(productSlug, pageOrderMapByTabGroup);
+  });
+
+  return {
+    productOrderMap,
+    tabOrderMapByProduct,
+    groupOrderMapByProductTab,
+    pageOrderMapByProductTabGroup,
+  };
+}
+
+function getTabOrderMap(productSlug) {
+  return (
+    NAVIGATION_ORDER_INDEXES.tabOrderMapByProduct.get(productSlug) ?? EMPTY_MAP
+  );
+}
+
+function getGroupOrderMap(productSlug, tabSlug) {
+  const byTab =
+    NAVIGATION_ORDER_INDEXES.groupOrderMapByProductTab.get(productSlug) ??
+    EMPTY_MAP;
+  return byTab.get(tabSlug) ?? EMPTY_MAP;
+}
+
+function getPageOrderMap(productSlug, tabSlug, groupSlug) {
+  const byTab =
+    NAVIGATION_ORDER_INDEXES.pageOrderMapByProductTabGroup.get(productSlug) ??
+    EMPTY_MAP;
+  const byGroup = byTab.get(tabSlug) ?? EMPTY_MAP;
+  return byGroup.get(groupSlug) ?? EMPTY_MAP;
+}
+
+function sortByConfiguredOrder(
+  items,
+  getOrderKey,
+  orderMap,
+  fallbackCompare = null
+) {
+  return [...items].sort((a, b) => {
+    const orderA = orderMap.get(getOrderKey(a));
+    const orderB = orderMap.get(getOrderKey(b));
+
+    if (orderA !== undefined && orderB !== undefined) return orderA - orderB;
+    if (orderA !== undefined) return -1;
+    if (orderB !== undefined) return 1;
+
+    return fallbackCompare ? fallbackCompare(a, b) : 0;
+  });
+}
+
+function toTabRelativePagePath(pagePath, language, productSlug, tabSlug) {
+  const prefix = `${language}/${productSlug}/${tabSlug}/`;
+  if (!pagePath.startsWith(prefix)) return pagePath;
+  return pagePath.slice(prefix.length);
+}
+
 async function listDir(dirAbs) {
   const entries = await fs.readdir(dirAbs, { withFileTypes: true });
   return entries.filter((e) => {
@@ -517,12 +573,23 @@ async function buildNavigationForLanguage(language, docs, contentRootAbs, update
   const products = [];
 
   const productDirs = (await listDir(langAbs)).filter((e) => e.isDirectory());
+  const productOrderMap = NAVIGATION_ORDER_INDEXES.productOrderMap;
+  productDirs.sort((a, b) => {
+    const orderA = productOrderMap.get(a.name);
+    const orderB = productOrderMap.get(b.name);
+
+    if (orderA !== undefined && orderB !== undefined) return orderA - orderB;
+    if (orderA !== undefined) return -1;
+    if (orderB !== undefined) return 1;
+    return a.name.localeCompare(b.name);
+  });
 
   for (const productDir of productDirs) {
     const productSlug = productDir.name;
     const productAbs = path.join(langAbs, productSlug);
 
     const productName = toDisplayName(productSlug, language);
+    const tabOrderMap = getTabOrderMap(productSlug);
     const tabs = [];
 
     const tabDirs = (await listDir(productAbs)).filter((e) =>
@@ -534,6 +601,9 @@ async function buildNavigationForLanguage(language, docs, contentRootAbs, update
       const tabAbs = path.join(productAbs, tabSlug);
 
       const tabName = toDisplayName(tabSlug, language);
+      const groupOrderMap = getGroupOrderMap(productSlug, tabSlug);
+      const toPageOrderKey = (pagePath) =>
+        toTabRelativePagePath(pagePath, language, productSlug, tabSlug);
       const groups = [];
       const defaultPages = [];
 
@@ -543,13 +613,25 @@ async function buildNavigationForLanguage(language, docs, contentRootAbs, update
         const childAbs = path.join(tabAbs, child.name);
 
         if (child.isDirectory()) {
-          const groupName = toDisplayName(child.name, language);
+          const groupSlug = child.name;
+          const groupName = toDisplayName(groupSlug, language);
           const pages = await collectPagesRecursively(
             childAbs,
             contentRootAbs,
             updateTitles
           );
-          if (pages.length) groups.push({ group: groupName, pages });
+          if (pages.length) {
+            const orderedPages = sortByConfiguredOrder(
+              pages,
+              toPageOrderKey,
+              getPageOrderMap(productSlug, tabSlug, groupSlug)
+            );
+            groups.push({
+              group: groupName,
+              groupSlug,
+              pages: orderedPages,
+            });
+          }
         } else if (
           child.isFile() &&
           MARKDOWN_EXTS.has(path.extname(child.name).toLowerCase())
@@ -569,32 +651,41 @@ async function buildNavigationForLanguage(language, docs, contentRootAbs, update
       const tabNode = { tab: tabName, tabSlug: tabSlug, groups: [] };
 
       if (defaultPages.length) {
+        const sortedDefaultPages = await sortPages(defaultPages, contentRootAbs);
+        const orderedDefaultPages = sortByConfiguredOrder(
+          sortedDefaultPages,
+          toPageOrderKey,
+          getPageOrderMap(productSlug, tabSlug, DEFAULT_GROUP_SLUG)
+        );
         tabNode.groups.push({
+          groupSlug: DEFAULT_GROUP_SLUG,
           group:
             DEFAULT_GROUP_NAME_BY_LANGUAGE[language] ?? "Default",
-          pages: await sortPages(defaultPages, contentRootAbs),
+          pages: orderedDefaultPages,
         });
       }
 
-      tabNode.groups.push(
-        ...groups.sort((a, b) =>
-          a.group.localeCompare(b.group)
-        )
+      const sortedNonDefaultGroups = sortByConfiguredOrder(
+        groups.sort((a, b) => a.group.localeCompare(b.group)),
+        (group) => group.groupSlug,
+        groupOrderMap
       );
+      tabNode.groups.push(...sortedNonDefaultGroups);
+
+      // Keep default group first unless __default__ is explicitly configured.
+      if (groupOrderMap.has(DEFAULT_GROUP_SLUG)) {
+        tabNode.groups = sortByConfiguredOrder(
+          tabNode.groups,
+          (group) => group.groupSlug,
+          groupOrderMap
+        );
+      }
 
       tabs.push(tabNode);
     }
 
     // ⭐ Sort tabs according to configuration
     if (tabs.length) {
-      const tabOrder = TAB_ORDER_BY_PRODUCT[productSlug] || [];
-      
-      // create a map from tab slug to configured index
-      const tabOrderMap = new Map();
-      tabOrder.forEach((slug, index) => {
-        tabOrderMap.set(slug, index);
-      });
-
       tabs.sort((a, b) => {
         const orderA = tabOrderMap.get(a.tabSlug);
         const orderB = tabOrderMap.get(b.tabSlug);
@@ -615,8 +706,13 @@ async function buildNavigationForLanguage(language, docs, contentRootAbs, update
         return a.tabSlug.localeCompare(b.tabSlug);
       });
       
-      // After sorting, remove tabSlug, keep tab (display name) for output
-      tabs.forEach(tab => delete tab.tabSlug);
+      // After sorting, remove internal slugs and keep display names for output
+      tabs.forEach((tab) => {
+        delete tab.tabSlug;
+        tab.groups.forEach((group) => {
+          delete group.groupSlug;
+        });
+      });
 
       products.push({
         product: productName,
@@ -658,6 +754,12 @@ async function main() {
   const docsAbs = path.resolve(args.docs);
   const contentRootAbs = path.resolve(args.contentRoot);
 
+  DISPLAY_NAME_OVERRIDES = JSON.parse(
+    await fs.readFile(DISPLAY_NAME_OVERRIDES_FILE, "utf8")
+  );
+  NAVIGATION_ORDER_INDEXES = buildNavigationOrderIndexes(
+    JSON.parse(await fs.readFile(NAVIGATION_ORDER_TREE_FILE, "utf8"))
+  );
   const docs = JSON.parse(await fs.readFile(docsAbs, "utf8"));
   const languages = await resolveLanguages({
     docs,
