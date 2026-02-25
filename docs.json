@@ -307,32 +307,6 @@
                 ]
               },
               {
-                "tab": "Plugin Development",
-                "groups": [
-                  {
-                    "group": "Default",
-                    "pages": [
-                      "en/ai/plugin-development/index",
-                      "en/ai/plugin-development/overview",
-                      "en/ai/plugin-development/concepts",
-                      "en/ai/plugin-development/develop",
-                      "en/ai/plugin-development/install",
-                      "en/ai/plugin-development/permissions",
-                      "en/ai/plugin-development/schema"
-                    ]
-                  },
-                  {
-                    "group": "Feishu Document Example",
-                    "pages": [
-                      "en/ai/plugin-development/feishu-document-example/index",
-                      "en/ai/plugin-development/feishu-document-example/integration",
-                      "en/ai/plugin-development/feishu-document-example/source",
-                      "en/ai/plugin-development/feishu-document-example/transformer"
-                    ]
-                  }
-                ]
-              },
-              {
                 "tab": "Chatkit",
                 "groups": [
                   {
@@ -372,6 +346,32 @@
                       "en/ai/tutorial/build-agentic-chatbi-from-scratch",
                       "en/ai/tutorial/project-group-single-vs-multi-agent",
                       "en/ai/tutorial/tutorial"
+                    ]
+                  }
+                ]
+              },
+              {
+                "tab": "Plugin",
+                "groups": [
+                  {
+                    "group": "Default",
+                    "pages": [
+                      "en/ai/plugin/index",
+                      "en/ai/plugin/overview",
+                      "en/ai/plugin/concepts",
+                      "en/ai/plugin/develop",
+                      "en/ai/plugin/install",
+                      "en/ai/plugin/permissions",
+                      "en/ai/plugin/schema"
+                    ]
+                  },
+                  {
+                    "group": "Feishu Document Example",
+                    "pages": [
+                      "en/ai/plugin/feishu-document-example/index",
+                      "en/ai/plugin/feishu-document-example/integration",
+                      "en/ai/plugin/feishu-document-example/source",
+                      "en/ai/plugin/feishu-document-example/transformer"
                     ]
                   }
                 ]
@@ -897,32 +897,6 @@
                 ]
               },
               {
-                "tab": "插件开发",
-                "groups": [
-                  {
-                    "group": "默认",
-                    "pages": [
-                      "zh-Hans/ai/plugin-development/overview",
-                      "zh-Hans/ai/plugin-development/core-concepts",
-                      "zh-Hans/ai/plugin-development/development-steps",
-                      "zh-Hans/ai/plugin-development/publish-and-use",
-                      "zh-Hans/ai/plugin-development/permission-design-guide",
-                      "zh-Hans/ai/plugin-development/schema-ui-extension",
-                      "zh-Hans/ai/plugin-development/plugin-development"
-                    ]
-                  },
-                  {
-                    "group": "飞书文档示例",
-                    "pages": [
-                      "zh-Hans/ai/plugin-development/feishu-document-example/feishu-document-example",
-                      "zh-Hans/ai/plugin-development/feishu-document-example/feishu-system-integration",
-                      "zh-Hans/ai/plugin-development/feishu-document-example/feishu-document-source-strategy",
-                      "zh-Hans/ai/plugin-development/feishu-document-example/feishu-document-conversion-strategy"
-                    ]
-                  }
-                ]
-              },
-              {
                 "tab": "Chatkit",
                 "groups": [
                   {
@@ -961,6 +935,38 @@
                       "zh-Hans/ai/tutorial/build-agentic-chatbi-from-scratch",
                       "zh-Hans/ai/tutorial/project-group-single-vs-multi-agent",
                       "zh-Hans/ai/tutorial/agentic-bi-end-to-end-analysis"
+                    ]
+                  }
+                ]
+              },
+              {
+                "tab": "插件",
+                "groups": [
+                  {
+                    "group": "默认",
+                    "pages": [
+                      "zh-Hans/ai/plugin/overview",
+                      "zh-Hans/ai/plugin/core-concepts",
+                      "zh-Hans/ai/plugin/development-steps",
+                      "zh-Hans/ai/plugin/publish-and-use",
+                      "zh-Hans/ai/plugin/permission-design-guide",
+                      "zh-Hans/ai/plugin/schema-ui-extension",
+                      "zh-Hans/ai/plugin/plugin-development"
+                    ]
+                  },
+                  {
+                    "group": "飞书",
+                    "pages": [
+                      "zh-Hans/ai/plugin/lark/index"
+                    ]
+                  },
+                  {
+                    "group": "飞书文档示例",
+                    "pages": [
+                      "zh-Hans/ai/plugin/feishu-document-example/feishu-document-example",
+                      "zh-Hans/ai/plugin/feishu-document-example/feishu-system-integration",
+                      "zh-Hans/ai/plugin/feishu-document-example/feishu-document-source-strategy",
+                      "zh-Hans/ai/plugin/feishu-document-example/feishu-document-conversion-strategy"
                     ]
                   }
                 ]
@@ -1226,6 +1232,21 @@
                       "zh-Hans/code/web/tasks",
                       "zh-Hans/code/web/change-sets",
                       "zh-Hans/code/web/environments"
+                    ]
+                  },
+                  {
+                    "group": "Git",
+                    "pages": [
+                      "zh-Hans/code/web/git/github",
+                      "zh-Hans/code/web/git/gitlab",
+                      "zh-Hans/code/web/git/gitee",
+                      "zh-Hans/code/web/git/codeup"
+                    ]
+                  },
+                  {
+                    "group": "飞书",
+                    "pages": [
+                      "zh-Hans/code/web/lark/index"
                     ]
                   }
                 ]

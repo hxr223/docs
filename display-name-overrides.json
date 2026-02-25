@@ -25,7 +25,7 @@
     "conversation": "对话",
     "digital-expert": "数字专家",
     "knowledge-base": "知识库",
-    "plugin-development": "插件开发",
+    "plugin": "插件",
     "toolset": "工具集",
     "troubleshooting": "故障排查",
     "tutorial": "教程",
@@ -54,6 +54,8 @@
     "community": "社区",
     "enterprise": "企业版",
     "onboarding": "入门指南",
-    "cloud": "云服务"
+    "cloud": "云服务",
+    "git": "Git",
+    "lark": "飞书"
   }
 }
