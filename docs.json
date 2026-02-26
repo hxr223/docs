@@ -638,6 +638,21 @@
                       "en/code/web/change-sets",
                       "en/code/web/environments"
                     ]
+                  },
+                  {
+                    "group": "Git",
+                    "pages": [
+                      "en/code/web/git/github",
+                      "en/code/web/git/gitlab",
+                      "en/code/web/git/gitee",
+                      "en/code/web/git/codeup"
+                    ]
+                  },
+                  {
+                    "group": "Lark",
+                    "pages": [
+                      "en/code/web/lark/index"
+                    ]
                   }
                 ]
               }
@@ -724,6 +739,12 @@
                       "zh-Hans/ai/digital-expert/monitoring-dashboard",
                       "zh-Hans/ai/digital-expert/supervised-architecture",
                       "zh-Hans/ai/digital-expert/swarm-architecture"
+                    ]
+                  },
+                  {
+                    "group": "技能",
+                    "pages": [
+                      "zh-Hans/ai/digital-expert/skill/index"
                     ]
                   },
                   {

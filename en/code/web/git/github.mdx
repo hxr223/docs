@@ -1,0 +1,44 @@
+---
+title: GitHub Configuration
+sidebar_position: 1
+tag: "github"
+---
+
+`GitHub` currently supports only the `APP_INSTALLATION` authentication method (GitHub App Installation) in the backend implementation.
+
+## Backend Prerequisites
+
+Configure at least the following environment variables in the API service:
+
+- `GIT_CREDENTIALS_KEY`: Used to encrypt and store connection credentials.
+- `BACKEND_PUBLIC_URL` or `PUBLIC_API_URL`: Used to generate the `Webhook URL` displayed on the page.
+- `FRONTEND_URL`: The address to redirect to the Web after GitHub installation is complete.
+- `GITHUB_APP_SLUG`: The slug of the GitHub App (used to generate installation and management pages).
+- `GITHUB_APP_ID`
+- `GITHUB_APP_PRIVATE_KEY`
+
+Optional:
+
+- `GITHUB_WEBHOOK_SECRET`: If configured, the backend will verify GitHub Webhook signatures.
+
+## Web Configuration Steps
+
+1. Open `Settings -> Connectors` (`/settings/connectors`).
+2. Select `GitHub` from the `Provider` dropdown.
+3. `Auth method` will be `APP_INSTALLATION`.
+4. Copy the `Webhook URL` displayed on the page.
+5. Click `Start Connection` to redirect to the GitHub App installation page.
+6. After completing installation and authorizing repositories in GitHub, the page will automatically return to the connectors page, and the connection will appear in the `Existing Connections` list.
+
+## GitHub App Configuration Recommendations
+
+- Enter the `Webhook URL` copied in the previous step in the GitHub App's Webhook settings.
+- If you set `GITHUB_WEBHOOK_SECRET`, the Webhook Secret in the GitHub App must match.
+- Recommended events to enable: `pull_request`, `issue_comment`, `issues` (corresponding to current backend processing logic).
+
+## Troubleshooting
+
+- `Missing GITHUB_APP_ID or GITHUB_APP_PRIVATE_KEY`: Check the GitHub App environment variables.
+- The Webhook URL displayed on the page is `localhost`: Set `BACKEND_PUBLIC_URL` (or `PUBLIC_API_URL`) to an externally accessible address.
+- Page does not redirect to frontend after installation: Verify that `FRONTEND_URL` is configured correctly.
+
