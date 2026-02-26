@@ -132,6 +132,7 @@
                       "en/ai/digital-expert/conversation-logs",
                       "en/ai/digital-expert/development-api",
                       "en/ai/digital-expert/monitoring-dashboard",
+                      "en/ai/digital-expert/chat-channels",
                       "en/ai/digital-expert/supervised-architecture",
                       "en/ai/digital-expert/swarm-architecture"
                     ]
@@ -162,7 +163,7 @@
                   {
                     "group": "Default",
                     "pages": [
-                      "en/ai/knowledge-base/knowledge-base-features",
+                      "en/ai/knowledge-base/index",
                       "en/ai/knowledge-base/maintain-documents",
                       "en/ai/knowledge-base/api",
                       "en/ai/knowledge-base/connect-external-knowledge-base",
@@ -307,6 +308,40 @@
                 ]
               },
               {
+                "tab": "Plugin",
+                "groups": [
+                  {
+                    "group": "Default",
+                    "pages": [
+                      "en/ai/plugin/index",
+                      "en/ai/plugin/overview",
+                      "en/ai/plugin/concepts",
+                      "en/ai/plugin/develop",
+                      "en/ai/plugin/install",
+                      "en/ai/plugin/permissions",
+                      "en/ai/plugin/schema"
+                    ]
+                  },
+                  {
+                    "group": "Trigger",
+                    "pages": [
+                      "en/ai/plugin/trigger/index",
+                      "en/ai/plugin/trigger/schedule-trigger",
+                      "en/ai/plugin/trigger/lark-trigger"
+                    ]
+                  },
+                  {
+                    "group": "Feishu Document Example",
+                    "pages": [
+                      "en/ai/plugin/feishu-document-example/index",
+                      "en/ai/plugin/feishu-document-example/integration",
+                      "en/ai/plugin/feishu-document-example/source",
+                      "en/ai/plugin/feishu-document-example/transformer"
+                    ]
+                  }
+                ]
+              },
+              {
                 "tab": "Chatkit",
                 "groups": [
                   {
@@ -346,32 +381,6 @@
                       "en/ai/tutorial/build-agentic-chatbi-from-scratch",
                       "en/ai/tutorial/project-group-single-vs-multi-agent",
                       "en/ai/tutorial/tutorial"
-                    ]
-                  }
-                ]
-              },
-              {
-                "tab": "Plugin",
-                "groups": [
-                  {
-                    "group": "Default",
-                    "pages": [
-                      "en/ai/plugin/index",
-                      "en/ai/plugin/overview",
-                      "en/ai/plugin/concepts",
-                      "en/ai/plugin/develop",
-                      "en/ai/plugin/install",
-                      "en/ai/plugin/permissions",
-                      "en/ai/plugin/schema"
-                    ]
-                  },
-                  {
-                    "group": "Feishu Document Example",
-                    "pages": [
-                      "en/ai/plugin/feishu-document-example/index",
-                      "en/ai/plugin/feishu-document-example/integration",
-                      "en/ai/plugin/feishu-document-example/source",
-                      "en/ai/plugin/feishu-document-example/transformer"
                     ]
                   }
                 ]
@@ -737,6 +746,7 @@
                       "zh-Hans/ai/digital-expert/conversation-logs",
                       "zh-Hans/ai/digital-expert/development-api",
                       "zh-Hans/ai/digital-expert/monitoring-dashboard",
+                      "zh-Hans/ai/digital-expert/chat-channels",
                       "zh-Hans/ai/digital-expert/supervised-architecture",
                       "zh-Hans/ai/digital-expert/swarm-architecture"
                     ]
@@ -773,7 +783,7 @@
                   {
                     "group": "默认",
                     "pages": [
-                      "zh-Hans/ai/knowledge-base/knowledge-base-features",
+                      "zh-Hans/ai/knowledge-base/index",
                       "zh-Hans/ai/knowledge-base/maintain-documents",
                       "zh-Hans/ai/knowledge-base/api",
                       "zh-Hans/ai/knowledge-base/connect-external-knowledge-base",
@@ -918,6 +928,46 @@
                 ]
               },
               {
+                "tab": "插件",
+                "groups": [
+                  {
+                    "group": "默认",
+                    "pages": [
+                      "zh-Hans/ai/plugin/overview",
+                      "zh-Hans/ai/plugin/core-concepts",
+                      "zh-Hans/ai/plugin/development-steps",
+                      "zh-Hans/ai/plugin/publish-and-use",
+                      "zh-Hans/ai/plugin/permission-design-guide",
+                      "zh-Hans/ai/plugin/schema-ui-extension",
+                      "zh-Hans/ai/plugin/plugin-development"
+                    ]
+                  },
+                  {
+                    "group": "触发器",
+                    "pages": [
+                      "zh-Hans/ai/plugin/trigger/index",
+                      "zh-Hans/ai/plugin/trigger/schedule-trigger",
+                      "zh-Hans/ai/plugin/trigger/lark-trigger"
+                    ]
+                  },
+                  {
+                    "group": "飞书",
+                    "pages": [
+                      "zh-Hans/ai/plugin/lark/index"
+                    ]
+                  },
+                  {
+                    "group": "飞书文档示例",
+                    "pages": [
+                      "zh-Hans/ai/plugin/feishu-document-example/feishu-document-example",
+                      "zh-Hans/ai/plugin/feishu-document-example/feishu-system-integration",
+                      "zh-Hans/ai/plugin/feishu-document-example/feishu-document-source-strategy",
+                      "zh-Hans/ai/plugin/feishu-document-example/feishu-document-conversion-strategy"
+                    ]
+                  }
+                ]
+              },
+              {
                 "tab": "Chatkit",
                 "groups": [
                   {
@@ -956,38 +1006,6 @@
                       "zh-Hans/ai/tutorial/build-agentic-chatbi-from-scratch",
                       "zh-Hans/ai/tutorial/project-group-single-vs-multi-agent",
                       "zh-Hans/ai/tutorial/agentic-bi-end-to-end-analysis"
-                    ]
-                  }
-                ]
-              },
-              {
-                "tab": "插件",
-                "groups": [
-                  {
-                    "group": "默认",
-                    "pages": [
-                      "zh-Hans/ai/plugin/overview",
-                      "zh-Hans/ai/plugin/core-concepts",
-                      "zh-Hans/ai/plugin/development-steps",
-                      "zh-Hans/ai/plugin/publish-and-use",
-                      "zh-Hans/ai/plugin/permission-design-guide",
-                      "zh-Hans/ai/plugin/schema-ui-extension",
-                      "zh-Hans/ai/plugin/plugin-development"
-                    ]
-                  },
-                  {
-                    "group": "飞书",
-                    "pages": [
-                      "zh-Hans/ai/plugin/lark/index"
-                    ]
-                  },
-                  {
-                    "group": "飞书文档示例",
-                    "pages": [
-                      "zh-Hans/ai/plugin/feishu-document-example/feishu-document-example",
-                      "zh-Hans/ai/plugin/feishu-document-example/feishu-system-integration",
-                      "zh-Hans/ai/plugin/feishu-document-example/feishu-document-source-strategy",
-                      "zh-Hans/ai/plugin/feishu-document-example/feishu-document-conversion-strategy"
                     ]
                   }
                 ]

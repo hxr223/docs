@@ -45,8 +45,17 @@
           "groups": []
         },
         {
-          "slug": "plugin-development",
-          "groups": []
+          "slug": "plugin",
+          "groups": [
+            {
+              "slug": "trigger",
+              "pages": [
+                "index",
+                "schedule-trigger",
+                "lark-trigger"
+              ]
+            }
+          ]
         },
         {
           "slug": "chatkit",

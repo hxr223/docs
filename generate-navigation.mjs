@@ -403,6 +403,19 @@ function buildNavigationOrderIndexes(orderTree) {
           if (!pageOrderMap.has(pageSlug)) {
             pageOrderMap.set(pageSlug, pageIndex);
           }
+
+          // Support group-relative page slugs (e.g. "schedule-trigger")
+          // in addition to tab-relative slugs (e.g. "trigger/schedule-trigger").
+          // This makes pages[] under a group intuitive while keeping backward compatibility.
+          if (
+            groupSlug !== DEFAULT_GROUP_SLUG &&
+            !pageSlug.startsWith(`${groupSlug}/`)
+          ) {
+            const tabRelativePageSlug = `${groupSlug}/${pageSlug}`;
+            if (!pageOrderMap.has(tabRelativePageSlug)) {
+              pageOrderMap.set(tabRelativePageSlug, pageIndex);
+            }
+          }
         });
 
         pageOrderMapByGroup.set(groupSlug, pageOrderMap);

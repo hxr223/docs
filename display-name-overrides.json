@@ -57,6 +57,7 @@
     "cloud": "云服务",
     "git": "Git",
     "lark": "飞书",
-    "skill": "技能"
+    "skill": "技能",
+    "trigger": "触发器"
   }
 }
